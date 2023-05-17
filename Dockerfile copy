@@ -1,0 +1,15 @@
+FROM node:16.15.1
+
+#작업 디렉토리
+RUN mkdir -p /app
+WORKDIR /app
+ADD . /app
+
+COPY package.json yarn.lock ./
+RUN yarn
+COPY . ./
+
+ENV HOST 0.0.0.0
+EXPOSE 5173
+
+CMD ["yarn","start","--","--host"]
